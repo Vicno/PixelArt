@@ -53,6 +53,8 @@
             this.buttonRight = new System.Windows.Forms.Button();
             this.buttonDown = new System.Windows.Forms.Button();
             this.buttonReset = new System.Windows.Forms.Button();
+            this.Rotate90Right = new System.Windows.Forms.RadioButton();
+            this.Rotate90Left = new System.Windows.Forms.RadioButton();
             this.controlls.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.SizeBar)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ColorBox)).BeginInit();
@@ -72,6 +74,8 @@
             // 
             // controlls
             // 
+            this.controlls.Controls.Add(this.Rotate90Left);
+            this.controlls.Controls.Add(this.Rotate90Right);
             this.controlls.Controls.Add(this.radioButtonScale05X);
             this.controlls.Controls.Add(this.radioButtonScale2X);
             this.controlls.Controls.Add(this.TranslateDrawing);
@@ -83,7 +87,7 @@
             this.controlls.Controls.Add(this.drawDDALine);
             this.controlls.Location = new System.Drawing.Point(859, 12);
             this.controlls.Name = "controlls";
-            this.controlls.Size = new System.Drawing.Size(152, 307);
+            this.controlls.Size = new System.Drawing.Size(152, 376);
             this.controlls.TabIndex = 1;
             this.controlls.TabStop = false;
             this.controlls.Text = "controlls";
@@ -127,7 +131,7 @@
             // FloodPaint
             // 
             this.FloodPaint.AutoSize = true;
-            this.FloodPaint.Location = new System.Drawing.Point(7, 280);
+            this.FloodPaint.Location = new System.Drawing.Point(6, 349);
             this.FloodPaint.Name = "FloodPaint";
             this.FloodPaint.Size = new System.Drawing.Size(96, 21);
             this.FloodPaint.TabIndex = 5;
@@ -198,7 +202,7 @@
             // 
             // Delete
             // 
-            this.Delete.Location = new System.Drawing.Point(859, 325);
+            this.Delete.Location = new System.Drawing.Point(859, 394);
             this.Delete.Name = "Delete";
             this.Delete.Size = new System.Drawing.Size(152, 48);
             this.Delete.TabIndex = 2;
@@ -208,7 +212,7 @@
             // 
             // ColorSelect
             // 
-            this.ColorSelect.Location = new System.Drawing.Point(859, 379);
+            this.ColorSelect.Location = new System.Drawing.Point(859, 448);
             this.ColorSelect.Name = "ColorSelect";
             this.ColorSelect.Size = new System.Drawing.Size(152, 50);
             this.ColorSelect.TabIndex = 3;
@@ -218,7 +222,7 @@
             // 
             // SizeBar
             // 
-            this.SizeBar.Location = new System.Drawing.Point(859, 517);
+            this.SizeBar.Location = new System.Drawing.Point(859, 577);
             this.SizeBar.Maximum = 100;
             this.SizeBar.Minimum = 10;
             this.SizeBar.Name = "SizeBar";
@@ -233,7 +237,7 @@
             this.SizeLabel.BackColor = System.Drawing.Color.White;
             this.SizeLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.SizeLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.SizeLabel.Location = new System.Drawing.Point(866, 554);
+            this.SizeLabel.Location = new System.Drawing.Point(859, 636);
             this.SizeLabel.Name = "SizeLabel";
             this.SizeLabel.Size = new System.Drawing.Size(2, 27);
             this.SizeLabel.TabIndex = 5;
@@ -241,7 +245,7 @@
             // ColorBox
             // 
             this.ColorBox.BackColor = System.Drawing.Color.Black;
-            this.ColorBox.Location = new System.Drawing.Point(881, 435);
+            this.ColorBox.Location = new System.Drawing.Point(881, 504);
             this.ColorBox.Name = "ColorBox";
             this.ColorBox.Size = new System.Drawing.Size(100, 50);
             this.ColorBox.TabIndex = 6;
@@ -250,7 +254,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(863, 497);
+            this.label1.Location = new System.Drawing.Point(863, 557);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(132, 17);
             this.label1.TabIndex = 7;
@@ -325,6 +329,30 @@
             this.buttonReset.UseVisualStyleBackColor = true;
             this.buttonReset.Click += new System.EventHandler(this.buttonReset_Click);
             // 
+            // Rotate90Right
+            // 
+            this.Rotate90Right.AutoSize = true;
+            this.Rotate90Right.Location = new System.Drawing.Point(7, 247);
+            this.Rotate90Right.Name = "Rotate90Right";
+            this.Rotate90Right.Size = new System.Drawing.Size(120, 21);
+            this.Rotate90Right.TabIndex = 9;
+            this.Rotate90Right.TabStop = true;
+            this.Rotate90Right.Text = "Rotate90Right";
+            this.Rotate90Right.UseVisualStyleBackColor = true;
+            this.Rotate90Right.CheckedChanged += new System.EventHandler(this.Rotate90Right_CheckedChanged);
+            // 
+            // Rotate90Left
+            // 
+            this.Rotate90Left.AutoSize = true;
+            this.Rotate90Left.Location = new System.Drawing.Point(7, 274);
+            this.Rotate90Left.Name = "Rotate90Left";
+            this.Rotate90Left.Size = new System.Drawing.Size(111, 21);
+            this.Rotate90Left.TabIndex = 10;
+            this.Rotate90Left.TabStop = true;
+            this.Rotate90Left.Text = "Rotate90Left";
+            this.Rotate90Left.UseVisualStyleBackColor = true;
+            this.Rotate90Left.CheckedChanged += new System.EventHandler(this.Rotate90Left_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -385,6 +413,8 @@
         private System.Windows.Forms.RadioButton TranslateDrawing;
         private System.Windows.Forms.RadioButton radioButtonScale2X;
         private System.Windows.Forms.RadioButton radioButtonScale05X;
+        private System.Windows.Forms.RadioButton Rotate90Right;
+        private System.Windows.Forms.RadioButton Rotate90Left;
     }
 }
 

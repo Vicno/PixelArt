@@ -23,6 +23,7 @@ namespace Paint3
         int traslacY = 0;
         int testVar = 0;
         int groupCount = 0;
+        double degree = 90;
 
         //Assets para traslacion de objetos
         int coordX;
@@ -219,7 +220,7 @@ namespace Paint3
 
             switch (scenario)
             {
-                case 0:
+                case 0: //Single Pixel draw
 
 
                     paint(point.X, point.Y, color);
@@ -227,7 +228,7 @@ namespace Paint3
 
                     break;
 
-                case 1:
+                case 1: //Draw DDALine
 
                     if (first == 0)
                     {
@@ -243,12 +244,13 @@ namespace Paint3
                         DDALine(sx, sy, ex, ey);
 
                         first = 0;
+                        groupCount++;
                     }
 
-                    groupCount++;
+                    
                     break;
 
-                case 2:
+                case 2: //Draw BresenhamLine
 
                     if (first == 0)
                     {
@@ -264,11 +266,12 @@ namespace Paint3
                         BresenhamLineDraw(sx, sy, ex, ey);
 
                         first = 0;
+                        groupCount++;
                     }
-                    groupCount++;
+                    
                     break;
 
-                case 3:
+                case 3: //Draw BresenhamCircle
 
                     if (first == 0)
                     {
@@ -288,7 +291,7 @@ namespace Paint3
                     groupCount++;
                     break;
 
-                case 4:
+                case 4: //Draw Elipse
 
                     if (first == 0)
                     {
@@ -332,7 +335,7 @@ namespace Paint3
                     groupCount++;
                     break;
 
-                case 5:
+                case 5: //FloodPaint
                     Pixel p = new Pixel(point.X, point.Y, color);
                     int pos = tabla.IndexOf(p);
                     if (pos != -1)
@@ -349,15 +352,14 @@ namespace Paint3
                     groupCount++;
 
                     break;
-                case 6:
-                    //first = 0;
+                case 6: //Move Group
 
                     if (first == 0)
                     {
                         coordX = point.X / PSize;
                         coordY = point.Y / PSize;
-                        pixMov.setPosX(coordX);
-                        pixMov.setPosY(coordY);
+                        pixMov.setPosX(coordX - traslacX);
+                        pixMov.setPosY(coordY - traslacY);
                         if (isRepetido(tabla, pixMov))
                         {
                             first++;
@@ -378,11 +380,11 @@ namespace Paint3
                     }
 
                     break;
-                case 7:
+                case 7: //Scale Up
                     coordX = point.X / PSize;
                     coordY = point.Y / PSize;
-                    pixMov.setPosX(coordX);
-                    pixMov.setPosY(coordY);
+                    pixMov.setPosX(coordX - traslacX);
+                    pixMov.setPosY(coordY - traslacY);
                     if (isRepetido(tabla, pixMov))
                     {                     
                         labelTest.Text = "Punto Elegido " + coordX + " , " + coordY;
@@ -394,11 +396,11 @@ namespace Paint3
                     }
                     
                     break;
-                case 8:
+                case 8: //Scale Down
                     coordX = point.X / PSize;
                     coordY = point.Y / PSize;
-                    pixMov.setPosX(coordX);
-                    pixMov.setPosY(coordY);
+                    pixMov.setPosX(coordX - traslacX);
+                    pixMov.setPosY(coordY - traslacY);
                     if (isRepetido(tabla, pixMov))
                     {
                         labelTest.Text = "Punto Elegido " + coordX + " , " + coordY;
@@ -410,9 +412,41 @@ namespace Paint3
                     }
 
                     break;
+                case 9: //Rotate
+                    coordX = point.X / PSize;
+                    coordY = point.Y / PSize;
+                    pixMov.setPosX(coordX - traslacX);
+                    pixMov.setPosY(coordY - traslacY);
+                    if (isRepetido(tabla, pixMov))
+                    {
+                        labelTest.Text = "Punto Elegido " + coordX + " , " + coordY;
+                        RotarFigura(getPunto(tabla, pixMov).getGrupo(), coordX, coordY);
+                    }
+                    else
+                    {
+                        labelTest.Text = "No hay un punto aca " + coordX + " , " + coordY;
+                    }
+
+                    break;
 
             }
 
+        }
+
+        private void RotarFigura(int grupo, int cx, int cy)
+        {
+            foreach (var punto in tabla)
+            {
+                if (punto.getGrupo() == grupo)
+                {
+                    double newX = (punto.getPosX() - cx) * Math.Cos(degree * Math.PI / 180) - (punto.getPosY()- cy) * Math.Sin(degree * Math.PI / 180) + cx - traslacX - traslacY;
+                    double newY = (punto.getPosX() - cx) * Math.Sin(degree * Math.PI / 180) + (punto.getPosY()- cy) * Math.Cos(degree * Math.PI / 180) + cy - traslacX - traslacY;
+                    punto.setPosX((int)Math.Round(newX));
+                    punto.setPosY((int)Math.Round(newY));
+                }
+            }
+            DeleteGrid();
+            RedibujarPuntos(tabla);
         }
 
         private void moverConjunto(int traslacionX, int traslacionY, int grupo)
@@ -1011,6 +1045,18 @@ namespace Paint3
         private void radioButtonScale05X_CheckedChanged(object sender, EventArgs e)
         {
             scenario = 8;
+        }
+
+        private void Rotate90Right_CheckedChanged(object sender, EventArgs e)
+        {
+            scenario = 9;
+            degree = 90;
+        }
+
+        private void Rotate90Left_CheckedChanged(object sender, EventArgs e)
+        {
+            scenario = 9;
+            degree = -90;
         }
     }
 }
